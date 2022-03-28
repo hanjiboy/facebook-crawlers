@@ -16,7 +16,7 @@ class FacebookPageAttrs(BasePage):
 
     LOGIN_BLOCK = (By.XPATH, '//div[@class="_6luv _52jv"]')
 
-    GROUP_TEXT = (By.XPATH, '//h1[@dir="auto"]')
+    PAGE_TEXT = (By.XPATH, '//h2[@dir="auto"]//span[@dir="auto"]//span')
 
     LINK_XPATH = (By.XPATH, '//div[@class="du4w35lb k4urcfbm l9j0dhe7 sjgh65i0"]'
                             '//a[@class="oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9'
@@ -24,9 +24,10 @@ class FacebookPageAttrs(BasePage):
                             ' a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl gmql0nx0 gpro0wi8 b1v8xokw"]')
     # Link location.
 
-    EXPAND_XPATH = (By.XPATH, '//div[@role="button"]'
-                              '//span[@class="j83agx80 fv0vnmcu hpfvmrgz"]'
-                              '//span[@dir="auto"]')  # Expand location.
+    GOOD_XPATH = (By.XPATH, '//div[@role="button"]'
+                            '//div[@class="rq0escxv l9j0dhe7 du4w35lb j83agx80 rj1gh0hx buofh1pr g5gj957u '
+                            'hpfvmrgz taijpn5t bp9cbjyn owycx6da btwxx1t3 d1544ag0 tw6a2znq jb3vyjys '
+                            'dlv3wnog rl04r1d5 mysgfdmx hddg9phg qu8okrzs g0qnabr5"]')  # Expand location.
 
     ARTICLE_TITLE_XPATH = (By.XPATH, '//div[@class="du4w35lb k4urcfbm l9j0dhe7 sjgh65i0"]'
                                      '//div[@dir="auto"]')  # Article title location.
@@ -38,6 +39,7 @@ class FacebookPageAttrs(BasePage):
     ARTICLE_CONTENT_BOXES_XPATH = (By.XPATH, '//div[@class="tw6a2znq sj5x9vvc d1544ag0 cxgpxx05"]'
                                              '//div[@class="ecm0bbzt e5nlhep0 a8c37x1j"]'
                                              '//div[@class="kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql"]')
+
     # Article message content location.
 
     def __init__(self, driver):
@@ -57,8 +59,8 @@ class FacebookPageAttrs(BasePage):
 
     def get_group_page_title(self):
         time.sleep(2)
-        self.driver.get(TestData.GROUP_URL)
-        return self.get_element_text(self.GROUP_TEXT)
+        self.driver.get(TestData.PAGE_URL)
+        return self.get_element_text(self.PAGE_TEXT)
 
     def get_article_link(self):
         links = []
@@ -70,18 +72,18 @@ class FacebookPageAttrs(BasePage):
         return links
 
     def click_expand_button(self):
-        if self.get_elements(self.EXPAND_XPATH):
-            self.something_click(self.EXPAND_XPATH)
-            return '點到了'
+        if self.get_elements(self.GOOD_XPATH):
+            self.something_click(self.GOOD_XPATH)
+            return '讚'
 
-    def get_article_title(self):
-        return self.is_visible(self.ARTICLE_TITLE_XPATH)
-
-    def get_article_message_name_boxes(self):
-        return self.is_visible(self.ARTICLE_NAME_BOXES_XPATH)
-
-    def get_article_message_content_boxes(self):
-        return self.is_visible(self.ARTICLE_CONTENT_BOXES_XPATH)
+    # def get_article_title(self):
+    #     return self.is_visible(self.ARTICLE_TITLE_XPATH)
+    #
+    # def get_article_message_name_boxes(self):
+    #     return self.is_visible(self.ARTICLE_NAME_BOXES_XPATH)
+    #
+    # def get_article_message_content_boxes(self):
+    #     return self.is_visible(self.ARTICLE_CONTENT_BOXES_XPATH)
 
     def get_data(self):
         response = self.mongo_data()
