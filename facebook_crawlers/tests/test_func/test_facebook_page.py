@@ -18,7 +18,7 @@ class BaseTest:
 
 @pytest.fixture(scope='module', autouse=True)
 def log():
-    print('\n------Initiating chrome driver------')
+    print('\n------initiating chrome driver------')
     yield
     print('\n------teardown------')
 
