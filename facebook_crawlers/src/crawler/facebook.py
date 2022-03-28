@@ -39,7 +39,7 @@ class CrawlerFacebook:
         self.account = EMAIL
         self.password = PASSWORD
         client = pymongo.MongoClient(host='localhost', port=27017)
-        db = client['Gamesofa Careers']
+        db = client['GamesofaCareers']
         self.collections = db['ArticleList']
 
     def login(self):
