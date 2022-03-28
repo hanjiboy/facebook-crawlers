@@ -10,7 +10,7 @@ class BasePage:
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
         client = pymongo.MongoClient(host='localhost', port=27017)
-        db = client['Gamesofa Careers']
+        db = client['GamesofaCareers']
         self.collections = db['ArticleList']
 
     def something_click(self, by_locator):
